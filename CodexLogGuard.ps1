@@ -914,7 +914,7 @@ function New-Button([string]$Text, [int]$X, [int]$Y, [int]$W = 128) {
 $guardGroup = New-Object System.Windows.Forms.GroupBox
 $guardGroup.Text = "防护状态"
 $guardGroup.Location = New-Object System.Drawing.Point(12, 94)
-$guardGroup.Size = New-Object System.Drawing.Size(860, 72)
+$guardGroup.Size = New-Object System.Drawing.Size(860, 92)
 $guardGroup.BackColor = $script:ColorSurfaceBg
 $form.Controls.Add($guardGroup)
 
@@ -923,11 +923,13 @@ $lblCounter = New-Label "历史累计拦截：-- 次" 246 30 210
 $lblLastDelta = New-Label "上轮新增拦截：-- 次" 476 30 150
 $btnBlockerToggle = New-Button "拦截器未安装" 640 24 90
 $btnRestore = New-Button "监测时计数" 742 24 90
-$guardGroup.Controls.AddRange(@($lblBlocker, $lblCounter, $lblLastDelta, $btnBlockerToggle, $btnRestore))
+$lblGuardNote = New-Label "说明：安装拦截保护后会持续生效；无需每次启动本工具，停止监测后仍会继续拦截日志写入。" 16 60 810
+$lblGuardNote.ForeColor = $script:ColorWarningText
+$guardGroup.Controls.AddRange(@($lblBlocker, $lblCounter, $lblLastDelta, $btnBlockerToggle, $btnRestore, $lblGuardNote))
 
 $fileGroup = New-Object System.Windows.Forms.GroupBox
 $fileGroup.Text = "文件管理"
-$fileGroup.Location = New-Object System.Drawing.Point(12, 174)
+$fileGroup.Location = New-Object System.Drawing.Point(12, 194)
 $fileGroup.Size = New-Object System.Drawing.Size(860, 112)
 $fileGroup.BackColor = $script:ColorSurfaceBg
 $form.Controls.Add($fileGroup)
@@ -954,7 +956,7 @@ $fileGroup.Controls.AddRange(@($lblLogWriteFile, $btnOpenCodexLogDir, $btnClearC
 
 $monitorGroup = New-Object System.Windows.Forms.GroupBox
 $monitorGroup.Text = "实时监测"
-$monitorGroup.Location = New-Object System.Drawing.Point(12, 294)
+$monitorGroup.Location = New-Object System.Drawing.Point(12, 314)
 $monitorGroup.Size = New-Object System.Drawing.Size(860, 130)
 $monitorGroup.BackColor = $script:ColorSurfaceBg
 $form.Controls.Add($monitorGroup)
@@ -978,14 +980,14 @@ $monitorGroup.Controls.AddRange(@($lblMonitorState, $lblWrite, $lblTopProcess, $
 
 $detailGroup = New-Object System.Windows.Forms.GroupBox
 $detailGroup.Text = "监测明细"
-$detailGroup.Location = New-Object System.Drawing.Point(12, 432)
-$detailGroup.Size = New-Object System.Drawing.Size(860, 222)
+$detailGroup.Location = New-Object System.Drawing.Point(12, 452)
+$detailGroup.Size = New-Object System.Drawing.Size(860, 202)
 $detailGroup.BackColor = $script:ColorSurfaceBg
 $form.Controls.Add($detailGroup)
 
 $grid = New-Object System.Windows.Forms.DataGridView
 $grid.Location = New-Object System.Drawing.Point(10, 24)
-$grid.Size = New-Object System.Drawing.Size(840, 168)
+$grid.Size = New-Object System.Drawing.Size(840, 148)
 $grid.AllowUserToAddRows = $false
 $grid.AllowUserToDeleteRows = $false
 $grid.ReadOnly = $true
@@ -1019,7 +1021,7 @@ foreach ($column in $columns) {
     [void]$grid.Columns.Add($gridColumn)
 }
 
-$lblMessage = New-Label "就绪" 10 196 840
+$lblMessage = New-Label "就绪" 10 176 840
 $detailGroup.Controls.Add($lblMessage)
 
 $timer = New-Object System.Windows.Forms.Timer
